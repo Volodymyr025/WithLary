@@ -1,0 +1,17 @@
+.input, .btn {
+  margin: 0.5rem auto;
+  padding: 1rem;
+  border-radius: 1rem;
+  text-align: end;
+  color: black;
+  box-shadow: 1px -1px 1px 0px;
+  font-size: 21.4px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.btn{
+    width: 278px;
+    background-color: #CBE3C7;
+    text-align: center;
+    margin-top: 3rem;
+    box-shadow: 1px 3px 1px;
+}
