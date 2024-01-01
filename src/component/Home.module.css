@@ -1,7 +1,6 @@
 .main {
     background-color: #caaacd;
     width: 100%;
-    height: 100%;
     display: grid;
     grid-template: 1fr/1fr 1fr;
     text-align: center;
@@ -9,7 +8,7 @@
 
 .mainRight {
     display: grid;
-    grid-template: 15rem 15rem 15rem/1fr 1fr;
+    grid-template: 13rem 13rem 13rem/0.8fr 0.8fr;
     list-style-type: none;
 }
 

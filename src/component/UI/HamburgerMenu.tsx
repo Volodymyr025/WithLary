@@ -8,14 +8,17 @@ import { motion } from "framer-motion"
 
 const HamburgerMenu = () => {
   const [showBar, setShowBar] = useState(false);
-  let x = 0
+
+  const variants = {
+    open: { opacity: 1, x: 0 },
+    closed: { opacity: 0, x: "-100%" },
+  }
 
   const showNavBar = () => {
     setShowBar(!showBar);
-    if(showBar){
-      x = 0
-    }
   };
+
+
 
   return (
     <>
@@ -27,9 +30,7 @@ const HamburgerMenu = () => {
         <span></span>
         <span></span>
       </button>
-
-      {showBar && (
-        <motion.ul className={style.main} animate={{x: -50}}>
+        <motion.ul className={style.main} animate={showBar ? 'open' : 'closed'} variants={variants}>
           <div className={style.menu__item__main}>
             <AccountCircleIcon
               style={{
@@ -50,6 +51,7 @@ const HamburgerMenu = () => {
               <section style={{ cursor: "pointer" }}>Registration</section>
             </div>
           </div>
+          
           <li className={style.options}>
             <ChecklistIcon></ChecklistIcon>
             <span>Favorite</span>
@@ -59,14 +61,14 @@ const HamburgerMenu = () => {
             <HelpOutlineIcon></HelpOutlineIcon>
             <span>Support</span>
           </li>
-          <li className={style.options} style={{ fontSize: 24 }}>
+          <li className={style.options} style={{ fontSize: 18 }}>
             <span></span>
             Delivery and return of goods
           </li>
-          <li className={style.options} style={{ fontSize: 24 }}>
+          <li className={style.options} style={{ fontSize: 18 }}>
             <span></span>Guarantees of obligations
           </li>
-          <li className={style.options} style={{ fontSize: 24 }}>
+          <li className={style.options} style={{ fontSize: 18 }}>
             <span></span>Offer
           </li>
           <hr></hr>
@@ -74,14 +76,13 @@ const HamburgerMenu = () => {
             <NotificationsActiveIcon></NotificationsActiveIcon>
             About Kids
           </li>
-          <li className={style.options} style={{ fontSize: 24 }}>
+          <li className={style.options} style={{ fontSize: 18 }}>
             <span></span>About us
           </li>
-          <li className={style.options} style={{ fontSize: 24 }}>
+          <li className={style.options} style={{ fontSize: 18 }}>
             <span></span>Contact us
           </li>
         </motion.ul>
-      )}
     </>
   );
 };

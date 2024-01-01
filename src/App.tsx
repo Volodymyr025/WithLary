@@ -9,6 +9,7 @@ function App() {
     <>
       <NavMenu />
       <Home />
+      <Login/>
     </>
   );
 }
