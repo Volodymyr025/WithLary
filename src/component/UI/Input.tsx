@@ -4,16 +4,16 @@ import style from "./Input.module.css";
 interface InputValue {
   children: string;
   inputType: string;
-  maxLength?: number;
-  validInput: any;
-  onChange: React.ChangeEvent<HTMLInputElement | string>;
+  maxLength: number;
+  styleInput: any;
+  onChange: React.ChangeEventHandler;
   onBlur: React.FocusEventHandler<HTMLInputElement>;
 }
 
 export const Input = ({
   children,
   inputType,
-  validInput,
+  styleInput,
   maxLength,
   onBlur,
   onChange,
@@ -22,7 +22,7 @@ export const Input = ({
     <input
       onBlur={onBlur}
       onChange={onChange}
-      style={validInput}
+      style={styleInput}
       className={style.input}
       type={inputType}
       placeholder={children}

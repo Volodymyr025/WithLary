@@ -1,8 +1,12 @@
 import style from "./Input.module.css";
 
-export const Btn = () => {
+interface btnType {
+  disabled:boolean
+}
+
+export const Btn = ({disabled}:btnType) => {
   return (
-    <button className={style.btn}>
+    <button className={style.btn} disabled={disabled}>
       <div className={style.arrow}>
         <div className={style.arrow_top}></div>
         <div className={style.arrow_mid}></div>
