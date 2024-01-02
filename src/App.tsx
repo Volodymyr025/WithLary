@@ -10,6 +10,7 @@ function App() {
       <NavMenu />
       <Home />
       <Login/>
+      <Registration/>
     </>
   );
 }

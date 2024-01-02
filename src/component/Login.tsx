@@ -2,28 +2,17 @@ import { Input } from "./UI/Input";
 import style from "./Login.module.css";
 import { Btn } from "./UI/Btn";
 import FormPage from "./UI/FormPage";
-import React, { useState } from "react";
-import { validPassword, validEmail } from "./Validator";
-
-export interface child {
-  children: JSX.Element;
-  title?: string;
-}
-
-const errorStyle = {
-  color: "red",
-  border: "3px solid #ffb21b",
-  boxShadow: "none",
-};
+import { useState } from "react";
+import { validPassword, validEmail, errorStyle } from "./Validator";
 
 export const Login = () => {
-  const [loginValue, setLoginValue] = useState("");
-  const [passwoedValue, setPasswordValue] = useState("");
+  const [inputsValue, setInputsValue] = useState({
+    email: "",
+    password: "",
+  });
 
   const [nameValid, setNameValid] = useState(false);
   const [passwordValid, setPasswordValid] = useState(false);
-
-  const [inputStyle, setInputStyle] = useState<null | {}>(null);
 
   return (
     <>
@@ -32,22 +21,19 @@ export const Login = () => {
           <div className={style.page}>
             <form className={style.form}>
               <Input
-                onBlur={(): void =>
-                  validEmail(
-                    loginValue,
-                    errorStyle,
-                    setInputStyle,
-                    setNameValid
-                  )
-                }
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setLoginValue(e.target.value)
-                }
+                onBlur={(): void => validEmail(inputsValue.email, setNameValid)}
+                onChange={({ target }: any) => {
+                  setInputsValue((prev) => ({
+                    ...prev,
+                    [target.name]: target.value,
+                  }));
+                }}
+                name={"email"}
                 inputType={"text"}
                 maxLength={50}
-                styleInput={!nameValid ? undefined : inputStyle}
+                styleInput={!nameValid ? undefined : errorStyle}
               >
-                User Name
+                {"User Name (Email)"}
               </Input>
               {nameValid && (
                 <p style={{ color: "black", fontSize: 18 }}>
@@ -55,20 +41,19 @@ export const Login = () => {
                 </p>
               )}
               <Input
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setPasswordValue(e.target.value)
-                }
+                onChange={({ target }: any) => {
+                  setInputsValue((prev) => ({
+                    ...prev,
+                    [target.name]: target.value,
+                  }));
+                }}
                 onBlur={(): void =>
-                  validPassword(
-                    passwoedValue,
-                    errorStyle,
-                    setInputStyle,
-                    setPasswordValid
-                  )
+                  validPassword(inputsValue.password, setPasswordValid)
                 }
+                name={"password"}
                 inputType={"password"}
                 maxLength={16}
-                styleInput={!passwordValid ? undefined : inputStyle}
+                styleInput={!passwordValid ? undefined : errorStyle}
               >
                 Password
               </Input>
@@ -77,7 +62,16 @@ export const Login = () => {
                   Password must have 6-16 characters and one symbol (!@#$%^&*())
                 </p>
               )}
-              <Btn disabled={!nameValid && !passwordValid ? true : false} />
+              <Btn
+                disabled={
+                  inputsValue.email &&
+                  inputsValue.password &&
+                  !nameValid &&
+                  !passwordValid
+                    ? false
+                    : true
+                }
+              />
             </form>
           </div>
         </>

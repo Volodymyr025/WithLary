@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Input.module.css";
 
 interface InputValue {
+  name: string;
   children: string;
   inputType: string;
   maxLength: number;
@@ -11,6 +12,7 @@ interface InputValue {
 }
 
 export const Input = ({
+  name,
   children,
   inputType,
   styleInput,
@@ -20,6 +22,7 @@ export const Input = ({
 }: InputValue) => {
   return (
     <input
+      name={name}
       onBlur={onBlur}
       onChange={onChange}
       style={styleInput}
@@ -27,6 +30,7 @@ export const Input = ({
       type={inputType}
       placeholder={children}
       maxLength={maxLength}
+      required
     />
   );
 };

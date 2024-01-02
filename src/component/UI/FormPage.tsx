@@ -1,6 +1,9 @@
 import style from './FormPage.module.css'
 
-import {child} from '../Login'
+export interface child {
+  children: JSX.Element;
+  title: string;
+}
 
 const FormPage = ({children, title}:child) => {
   return (
