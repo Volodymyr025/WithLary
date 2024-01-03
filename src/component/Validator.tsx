@@ -35,6 +35,7 @@ export const validPhone = (
   inputValue: number,
   validInput: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
+  validInput(false);
   isNaN(inputValue) && validInput(true);
 };
 
@@ -50,4 +51,13 @@ export const validPassword = (
   ) {
     validInput(true);
   }
+};
+
+export const validConfirm = (
+  passwordValue: string,
+  confirmValue: string,
+  validInput: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  validInput(false);
+  passwordValue.trim() === confirmValue.trim() ? undefined : validInput(true);
 };

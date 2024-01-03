@@ -52,7 +52,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    z-index: 99;
+    z-index: 90;
     position: relative;
     width: 3rem;
     height: 2.5rem;
@@ -103,6 +103,7 @@
     margin: 0;
     padding: 0;    
     width: 25%;
+    height: 100%;
     display: table;
 }
 

@@ -5,6 +5,7 @@ import ChecklistIcon from "@mui/icons-material/Checklist";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import { motion } from "framer-motion"
+import { NavLink } from "react-router-dom";
 
 const HamburgerMenu = () => {
   const [showBar, setShowBar] = useState(false);
@@ -46,9 +47,9 @@ const HamburgerMenu = () => {
               <section style={{ cursor: "pointer" }}>ENG</section>
             </div>
             <div className={style.logMenu}>
-              <section style={{ cursor: "pointer" }}>Login</section>
+              <section style={{ cursor: "pointer" }} onClick={showNavBar}><NavLink to={'login'}>Login</NavLink></section>
               <section className={style.line}></section>
-              <section style={{ cursor: "pointer" }}>Registration</section>
+              <section style={{ cursor: "pointer" }} onClick={showNavBar}><NavLink to={'registration'}>Registration</NavLink></section>
             </div>
           </div>
           
