@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+.logoLary {
+  font-size: 72px;
+  font-family: "Sevillana", cursive;
+  color: white;
+  margin: 0;
+}
+
+.underLogo {
+  color: white;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
