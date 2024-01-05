@@ -1,8 +1,9 @@
 import "./App.css";
+import Registration from "./component/pages/Registration";
 
 function App() {
   return <>
-  <h1>Start</h1>
+  <Registration/>
   </>;
 }
 

@@ -1,0 +1,18 @@
+.bg_page {
+    background-color: #caaacd;
+    text-align: center;
+    display: grid;
+    grid-auto-rows: max-content;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  
+  
+  .bg_page h2 {
+    font-size: 52px;
+    color: #86b594;
+    font-family: "Kingred Youth";
+    margin-top: 0;
+  }
