@@ -9,6 +9,7 @@ interface InputValue {
   styleInput: any;
   onChange: React.ChangeEventHandler;
   onBlur: React.FocusEventHandler<HTMLInputElement>;
+  value:string
 }
 
 export const Input = ({
@@ -19,10 +20,12 @@ export const Input = ({
   maxLength,
   onBlur,
   onChange,
+  value,
 }: InputValue) => {
   return (
     <input
       name={name}
+      value={value}
       onBlur={onBlur}
       onChange={onChange}
       style={styleInput}
