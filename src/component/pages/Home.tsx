@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import style from './Home.module.css'
+import style from "./Home.module.css";
 
 
 const Home = () => {
@@ -18,16 +18,14 @@ const Home = () => {
         <h1 className="logoLary">With Lary</h1>
         <p className="underLogo">Help Ma&Pa</p>
       </Box>
-      <Box >
+      <Box>
         <ul className={style.mainRight}>
-        <li>Child development from 0-36</li>
-        <li>Everything for feeding</li>
-        <li>Care, hygiene</li>
-        <li>Toys and creativity</li>
-        <li>
-          <a href={"sleep"}>Peaceful sleep</a>
-        </li>
-        <li>Children's room and security</li>
+          <li>Child development from 0-36</li>
+          <li>Everything for feeding</li>
+          <li>Care, hygiene</li>
+          <li>Toys and creativity</li>
+          <li>Peaceful sleep</li>
+          <li>Children's room and security</li>
         </ul>
       </Box>
     </Box>
