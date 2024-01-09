@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import style from "./NavigationMenu.module.css";
 import {
   Favorite,
@@ -8,6 +8,7 @@ import {
   ShoppingCart,
 } from "@mui/icons-material";
 import Cart from "./Cart";
+import HamburgerMenu from "./HamburgerMenu";
 
 const NavigationMenu = () => {
   const [showCart, setShowCart] = useState(false);
@@ -17,15 +18,15 @@ const NavigationMenu = () => {
   };
   return (
     <nav className={style.nav_menu}>
-       <Cart showCart={showCart} setCart={setShowCart}/>
-        <>HamburgerMenu</>
+      <Cart showCart={showCart} setCart={setShowCart} />
+
+      <HamburgerMenu />
       <ul className={style.nav_list}>
         <li>
           <a href={"/"}>
             <Home style={{ fontSize: 50 }} />
           </a>
         </li>
-
         <li>
           <Search style={{ fontSize: 50 }} />
         </li>

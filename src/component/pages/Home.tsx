@@ -8,7 +8,7 @@ const Home = () => {
       sx={{
         bgcolor: "#caaacd",
         width: "100%",
-        height: "100%",
+        height: "calc(100% - var(--heigthNavBar))",
         display: "grid",
         gridTemplate: "1fr/1fr 1fr",
         textAlign: "center",

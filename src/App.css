@@ -1,3 +1,7 @@
+:root{
+  --heigthNavBar:4rem
+}
+
 body {
   margin: 0;
   padding: 0;
