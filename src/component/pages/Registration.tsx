@@ -36,7 +36,7 @@ const Registration = () => {
         confirm: "",
       },
       onSubmit: (values, actions) => {
-        console.log("submited");
+        console.log(values, actions);
       },
       validationSchema: validSchema,
     });
