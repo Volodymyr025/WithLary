@@ -1,10 +1,10 @@
 import style from "./Input.module.css";
 
 interface btnType {
-  disabled:boolean
+  disabled: boolean;
 }
 
-export const Btn = ({disabled}:btnType) => {
+export const Btn = ({ disabled }: btnType) => {
   return (
     <button className={style.btn} disabled={disabled}>
       <div className={style.arrow}>

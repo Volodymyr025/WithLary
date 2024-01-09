@@ -1,79 +1,64 @@
 import { Input } from "../shered/Input";
-import style from "./Login.module.css";
 import { Btn } from "../shered/Btn";
-import Form from "../shered/Form";
-import { useState } from "react";
-import { validPassword, validEmail, errorStyle } from "..//util/validation";
-import { ERROR_MESSAGE } from "../util/error";
-import { NavLink } from "react-router-dom";
+import FormPage from "../shered/Form";
+import { validSchema } from "..//util/validation";
+import { useFormik } from "formik";
+import { userType, errorBorder, errorMessage } from "./Registration";
 
 export const Login = () => {
-  const [inputsValue, setInputsValue] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [nameValid, setNameValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
+    useFormik<userType>({
+      initialValues: {
+        lastName: "",
+        firstName: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirm: "",
+      },
+      onSubmit: (values, actions) => {
+        console.log("submited");
+      },
+      validationSchema: validSchema,
+    });
 
   return (
     <>
-      <Form title={"Login"}>
+      <FormPage submit={handleSubmit} title="Registration">
         <>
-          <div className={style.page}>
-            <form className={style.form}>
-              <Input
-                onBlur={(): void => validEmail(inputsValue.email, setNameValid)}
-                onChange={({ target }: any) => {
-                  setInputsValue((prev) => ({
-                    ...prev,
-                    [target.name]: target.value,
-                  }));
-                }}
-                name={"email"}
-                inputType={"text"}
-                maxLength={50}
-                styleInput={!nameValid ? undefined : errorStyle}
-              >
-                {"User Name (Email)"}
-              </Input>
-              {nameValid && ERROR_MESSAGE.emailField}
-              <Input
-                onChange={({ target }: any) => {
-                  setInputsValue((prev) => ({
-                    ...prev,
-                    [target.name]: target.value,
-                  }));
-                }}
-                onBlur={(): void =>
-                  validPassword(inputsValue.password, setPasswordValid)
-                }
-                name={"password"}
-                inputType={"password"}
-                maxLength={16}
-                styleInput={!passwordValid ? undefined : errorStyle}
-              >
-                Password
-              </Input>
-              {passwordValid && ERROR_MESSAGE.passwordField}
-              <Btn
-                disabled={
-                  inputsValue.email &&
-                  inputsValue.password &&
-                  !nameValid &&
-                  !passwordValid
-                    ? false
-                    : true
-                }
-              />
-
-              <p style={{ fontSize: 20 }}>
-                <NavLink to={"../registration"}>Registration</NavLink>
-              </p>
-            </form>
-          </div>
+          <Input
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            inputType={"email"}
+            maxLength={50}
+            name="email"
+            styleInput={errors.email && touched.email ? errorBorder : undefined}
+          >
+            Email
+          </Input>
+          {errors.email && touched.email && (
+            <p style={errorMessage}>{errors.email}</p>
+          )}
+          <Input
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            inputType={"password"}
+            maxLength={16}
+            name="password"
+            styleInput={
+              errors.password && touched.password ? errorBorder : undefined
+            }
+          >
+            Password
+          </Input>
+          {errors.password && touched.password && (
+            <p style={errorMessage}>{errors.password}</p>
+          )}
+          <Btn disabled={errors.email && errors.password ? true : false} />
         </>
-      </Form>
+      </FormPage>
     </>
   );
 };

@@ -1,8 +1,9 @@
-.page {
-  display: grid;
-  grid-template: 0.1fr 0.1fr 0.1fr/1fr;
+.errorBorder{
+  color: red;
+  border: 3px solid #ffb21b;
+  box-shadow: none;
 }
-
-.form {
-  display: grid;
+.errorMessage{
+  color: black;
+  font-size: 1rem;
 }

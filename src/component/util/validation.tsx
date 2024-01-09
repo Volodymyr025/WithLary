@@ -1,63 +1,30 @@
-import React from "react";
-
-interface validationType {
-  validInput: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import * as yup from "yup";
+import { ERROR_MESSAGE } from "./error";
 
 const regSymbol = /[!@#$%^&*()]/;
 const regEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const regPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
 
-export const errorStyle = {
-  color: "red",
-  border: "3px solid #ffb21b",
-  boxShadow: "none",
-};
-
-export const nameValid = (
-  nameInput: string,
-  validInput: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  validInput(false);
-  nameInput.trim().length < 1 ? validInput(true) : undefined;
-};
-
-export const validEmail = (
-  inputValue: string,
-  validInput: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  validInput(false);
-  if (inputValue.trim().length < 1 || !regEmail.test(inputValue)) {
-    validInput(true);
-  }
-};
-
-export const validPhone = (
-  inputValue: number,
-  validInput: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  validInput(false);
-  isNaN(inputValue) && validInput(true);
-};
-
-export const validPassword = (
-  inputValue: string,
-  validInput: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  validInput(false);
-  if (
-    inputValue.trim().length > 16 ||
-    inputValue.trim().length < 6 ||
-    !regSymbol.test(inputValue)
-  ) {
-    validInput(true);
-  }
-};
-
-export const validConfirm = (
-  passwordValue: string,
-  confirmValue: string,
-  validInput: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  validInput(false);
-  passwordValue.trim() === confirmValue.trim() ? undefined : validInput(true);
-};
+export const validSchema = yup.object().shape({
+  lastName: yup.string().required(ERROR_MESSAGE.emptyField),
+  firstName: yup.string().required(ERROR_MESSAGE.emptyField),
+  email: yup
+    .string()
+    .email()
+    .matches(regEmail, ERROR_MESSAGE.emailField)
+    .required(ERROR_MESSAGE.emptyField),
+  phone: yup
+    .string()
+    .matches(regPhone, ERROR_MESSAGE.phoneField)
+    .required(ERROR_MESSAGE.emptyField),
+  password: yup
+    .string()
+    .min(6)
+    .max(16)
+    .matches(regSymbol, ERROR_MESSAGE.passwordField)
+    .required(ERROR_MESSAGE.emptyField),
+  confirm: yup
+    .string()
+    .oneOf([yup.ref("password")], ERROR_MESSAGE.confirmField)
+    .required(ERROR_MESSAGE.emptyField),
+});
