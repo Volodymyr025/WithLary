@@ -1,170 +1,155 @@
-import { useState } from "react";
-import Form from "../shered/Form";
+import FormPage from "../shered/Form";
 import { Input } from "../shered/Input";
 import { Btn } from "../shered/Btn";
-import {
-  errorStyle,
-  nameValid,
-  validConfirm,
-  validEmail,
-  validPassword,
-  validPhone,
-} from "../util/validation";
-import { ERROR_MESSAGE } from "../util/error";
+import { validSchema } from "../util/validation";
+import { useFormik } from "formik";
 
-interface userType {
+export interface userType {
   lastName: string;
   firstName: string;
   email: string;
-  phone: number;
+  phone: string;
   password: string;
   confirm: string;
 }
 
+export const errorBorder = {
+  color: "red",
+  border: "3px solid #ffb21b",
+  boxShadow: "none",
+};
+
+export const errorMessage = {
+  color: "black",
+  fontSize: 18,
+};
+
 const Registration = () => {
-  const [user, setUser] = useState<userType>({
-    lastName: "",
-    firstName: "",
-    email: "",
-    phone: 0,
-    password: "",
-    confirm: "",
-  });
-
-  const [lastNameValid, setlastNameValid] = useState(false);
-  const [firstNameValid, setFirstNameValid] = useState(false);
-  const [emailValid, setEmailValid] = useState(false);
-  const [phoneValid, setPhoneValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
-  const [confirmPasswordValid, setConfirmPasswordValid] = useState(false);
-
-  const validBtn =
-    user.lastName &&
-    user.firstName &&
-    user.email &&
-    user.phone &&
-    user.password &&
-    user.confirm &&
-    !lastNameValid &&
-    !firstNameValid &&
-    !emailValid &&
-    !phoneValid &&
-    !passwordValid &&
-    !confirmPasswordValid
-      ? false
-      : true;
-
+  const { values, touched, errors, handleChange, handleBlur, handleSubmit } =
+    useFormik<userType>({
+      initialValues: {
+        lastName: "",
+        firstName: "",
+        email: "",
+        phone: "",
+        password: "",
+        confirm: "",
+      },
+      onSubmit: (values, actions) => {
+        console.log("submited");
+      },
+      validationSchema: validSchema,
+    });
   return (
     <>
-      <Form title="Registration">
+      <FormPage submit={handleSubmit} title="Registration">
         <>
           <Input
+            value={values.lastName}
+            onChange={handleChange}
+            onBlur={handleBlur}
             inputType={"text"}
             maxLength={15}
             name="lastName"
-            styleInput={lastNameValid ? errorStyle : undefined}
-            onChange={({ target }: any) => {
-              setUser((prev) => ({
-                ...prev,
-                [target.name]: target.value,
-              }));
-            }}
-            onBlur={(): void => nameValid(user.lastName, setlastNameValid)}
+            styleInput={
+              errors.lastName && touched.lastName ? errorBorder : undefined
+            }
           >
             Last Name
           </Input>
-          {lastNameValid && ERROR_MESSAGE.emptyField}
-
+          {errors.lastName && touched.lastName && (
+            <p style={errorMessage}>{errors.lastName}</p>
+          )}
           <Input
+            value={values.firstName}
+            onChange={handleChange}
+            onBlur={handleBlur}
             inputType={"text"}
             maxLength={15}
             name="firstName"
-            styleInput={firstNameValid ? errorStyle : undefined}
-            onChange={({ target }:any) => {
-              setUser((prev) => ({
-                ...prev,
-                [target.name]: target.value,
-              }));
-            }}
-            onBlur={(): void => nameValid(user.firstName, setFirstNameValid)}
+            styleInput={
+              errors.firstName && touched.firstName ? errorBorder : undefined
+            }
           >
             First Name
           </Input>
-          {firstNameValid && ERROR_MESSAGE.emptyField}
-
+          {errors.firstName && touched.firstName && (
+            <p style={errorMessage}>{errors.firstName}</p>
+          )}
           <Input
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
             inputType={"email"}
             maxLength={50}
             name="email"
-            styleInput={emailValid ? errorStyle : undefined}
-            onChange={({ target }: any) => {
-              setUser((prev) => ({
-                ...prev,
-                [target.name]: target.value,
-              }));
-            }}
-            onBlur={(): void => validEmail(user.email, setEmailValid)}
+            styleInput={errors.email && touched.email ? errorBorder : undefined}
           >
             Email
           </Input>
-          {emailValid && ERROR_MESSAGE.emailField}
-
+          {errors.email && touched.email && (
+            <p style={errorMessage}>{errors.email}</p>
+          )}
           <Input
+            value={values.phone}
+            onChange={handleChange}
+            onBlur={handleBlur}
             inputType={"phone"}
             maxLength={10}
             name="phone"
-            styleInput={phoneValid ? errorStyle : undefined}
-            onChange={({ target }: any) => {
-              setUser((prev) => ({
-                ...prev,
-                [target.name]: target.value,
-              }));
-            }}
-            onBlur={(): void => validPhone(user.phone, setPhoneValid)}
+            styleInput={errors.phone && touched.phone ? errorBorder : undefined}
           >
             Phone Number
           </Input>
-          {phoneValid && ERROR_MESSAGE.phoneField}
-
+          {errors.phone && touched.phone && (
+            <p style={errorMessage}>{errors.phone}</p>
+          )}
           <Input
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
             inputType={"password"}
             maxLength={16}
             name="password"
-            styleInput={passwordValid ? errorStyle : undefined}
-            onChange={({ target }: any) => {
-              setUser((prev) => ({
-                ...prev,
-                [target.name]: target.value,
-              }));
-            }}
-            onBlur={(): void => validPassword(user.password, setPasswordValid)}
+            styleInput={
+              errors.password && touched.password ? errorBorder : undefined
+            }
           >
             Password
           </Input>
-          {passwordValid && ERROR_MESSAGE.passwordField}
-
+          {errors.password && touched.password && (
+            <p style={errorMessage}>{errors.password}</p>
+          )}
           <Input
+            value={values.confirm}
+            onChange={handleChange}
+            onBlur={handleBlur}
             inputType={"password"}
             maxLength={16}
             name="confirm"
-            styleInput={confirmPasswordValid ? errorStyle : undefined}
-            onChange={({ target }: any) => {
-              setUser((prev) => ({
-                ...prev,
-                [target.name]: target.value,
-              }));
-            }}
-            onBlur={(): void =>
-              validConfirm(user.password, user.confirm, setConfirmPasswordValid)
+            styleInput={
+              errors.confirm && touched.confirm ? errorBorder : undefined
             }
           >
             Confirm password
           </Input>
-          {confirmPasswordValid && ERROR_MESSAGE.confirmField}
-
-          <Btn disabled={validBtn} />
+          {errors.confirm && touched.confirm && (
+            <p style={errorMessage}>{errors.confirm}</p>
+          )}
+          <Btn
+            disabled={
+              errors.firstName &&
+              errors.lastName &&
+              errors.email &&
+              errors.phone &&
+              errors.password &&
+              errors.confirm
+                ? true
+                : false
+            }
+          />
         </>
-      </Form>
+      </FormPage>
     </>
   );
 };
