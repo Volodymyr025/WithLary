@@ -1,0 +1,38 @@
+.mainRight {
+  display: grid;
+  grid-template: 13rem 13rem 13rem/0.8fr 0.8fr;
+  list-style-type: none;
+}
+.mainRight li {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+  color: white;
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.mainRight li:nth-child(1) {
+  background-color: #78c3c6;
+}
+
+.mainRight li:nth-child(2) {
+  background-color: #eb8b9d;
+}
+
+.mainRight li:nth-child(3) {
+  background-color: #a16ed1;
+}
+
+.mainRight li:nth-child(4) {
+  background-color: #eba95c;
+}
+
+.mainRight li:nth-child(5) {
+  background-color: #3e759f;
+}
+
+.mainRight li:nth-child(6) {
+  background-color: #ebd061;
+}
