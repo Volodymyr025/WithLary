@@ -1,10 +1,14 @@
 import "./App.css";
-import Registration from "./component/pages/Registration";
+import NavigationMenu from "./component/UI/NavigationMenu";
+import Home from "./component/pages/Home";
 
 function App() {
-  return <>
-  <Registration/>
-  </>;
+  return (
+    <>
+      <NavigationMenu />
+      <Home/>
+    </>
+  );
 }
 
 export default App;

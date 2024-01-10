@@ -1,3 +1,7 @@
+:root{
+  --heigthNavBar:4rem
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -9,7 +13,7 @@ html {
 }
 
 .logoLary {
-  font-size: 72px;
+  font-size: 5rem;
   font-family: "Sevillana", cursive;
   color: white;
   margin: 0;
